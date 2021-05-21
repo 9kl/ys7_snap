@@ -8,14 +8,15 @@ import paho.mqtt.client as mqtt
 
 from ys7_snap import settings
 from ys7_snap.remote import mqtt_public
+from ys7_snap.store import save_to_local
 from ys7_snap.ys7 import capture
 
 log = logging.getLogger("ys7_snap")
 
 
 def on_connect(client, userdata, flags, rc):
-    # client.subscribe(settings.MQTT_TOPIC_REAL_SNAP_IN)
-    client.subscribe('irr/photo/#')
+    # client.subscribe('irr/photo/#')
+    client.subscribe(settings.MQTT_TOPIC_REAL_SNAP_IN)
 
 
 def on_message(client, userdata, msg):
@@ -36,6 +37,10 @@ def on_message(client, userdata, msg):
                     "photo_url": url
                 }
                 mqtt_public(settings.MQTT_TOPIC_REAL_SNAP_OUT, d)
+
+                # 保存到本地
+                d = save_to_local(video, url)
+                mqtt_public(settings.MQTT_TOPIC_TIME_SNAP_OUT, d)
         except Exception as ex:
             log.error(ex)
 

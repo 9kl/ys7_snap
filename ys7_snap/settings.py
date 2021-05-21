@@ -65,8 +65,11 @@ if not conf_data.get('ys_token_cache_time', None):
 if not conf_data.get('ys_snap_time', None):
     raise RuntimeError('ys_snap_time')
 
-
+# 文件存储目录
 FILE_SAVE_DIR = conf_data.get('file_save_dir', __location__)
+
+# 图片缩略图参数
+THUMBNAIL_COMPRESSION_RATIO = int(conf_data.get('thumbnail_compression_ratio', 1))
 
 # mqtt
 MQTT_BROKE_URL = conf_data.get('mqtt_broke_url')
@@ -83,7 +86,6 @@ YS_APP_KEY = conf_data.get('ys_app_key')
 YS_APP_SECRET = conf_data.get('ys_app_secret')
 YS_TOKEN_CACHE_TIME = conf_data.get('ys_token_cache_time')
 YS_SNAP_TIME = conf_data.get('ys_snap_time')
-
 
 # log config
 LOGGING_CONFIG = {
