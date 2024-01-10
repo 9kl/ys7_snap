@@ -8,6 +8,6 @@ mqtt_topic_real_snap_out: "irr/photo/real/snap/out/"
 ys_app_key: 'a82a0438b15447529f3b7c156db37d09'
 ys_app_secret: 'b24b42528d8b7d8542d5c998e52c0a38'
 ys_token_cache_time: 604800
-ys_snap_time: 10800
+snap_cron_expr: '0 * * * *'
 file_save_dir: '/linkeddt/ys7_snap_images'
 thumbnail_compression_ratio: 2

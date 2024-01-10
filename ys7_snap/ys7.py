@@ -57,3 +57,46 @@ def capture(device_serial: str, channel_no: str):
         raise ex
     except Exception as ex:
         raise CaptureError(ex)
+
+
+def preset_move(device_serial: str, channel_no: str, index: int):
+    """移动到预置点"""
+    try:
+        access_token = get_access_token()
+        ys_preset_move_url = settings.YS_PRESET_MOVE_URL
+
+        post_data = {
+            'accessToken': access_token,
+            'deviceSerial': device_serial,
+            'channelNo': channel_no,
+            'index': index
+        }
+
+        data = requests.post(ys_preset_move_url, data=post_data).json()
+        rsp_code = data.get("code", 200)
+        if rsp_code == "200":
+            return True
+    except AccessTokenError as ex:
+        raise ex
+    except Exception as ex:
+        raise CaptureError(ex)
+
+
+def get_device_info(device_serial: str):
+    """获取单个设备信息"""
+    try:
+        access_token = get_access_token()
+        ys_mirror_url = settings.YS_DEVICE_INFO_URL
+        post_data = {
+            'accessToken': access_token,
+            'deviceSerial': device_serial
+        }
+
+        rsp_data = requests.post(ys_mirror_url, data=post_data).json()
+        rsp_code = rsp_data.get("code", 200)
+        if rsp_code == "200":
+            return rsp_data['data']
+    except AccessTokenError as ex:
+        raise ex
+    except Exception as ex:
+        raise CaptureError(ex)

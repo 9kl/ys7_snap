@@ -1,7 +1,11 @@
 import logging.config
 import signal
 import time
+"""
+必须要导入：from ys7_snap import tasks
+"""
 from ys7_snap import tasks
+
 
 from ys7_snap import aps, settings, mq
 
