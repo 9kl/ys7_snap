@@ -1,12 +1,13 @@
 import logging
 import time
 
-from ys7_snap import settings, aps
-from ys7_snap.remote import mqtt_public
-from ys7_snap.store import save_to_local
-from ys7_snap.ys7 import capture, preset_move, get_device_info
+import aps
+import settings
+from remote import mqtt_public
+from store import save_to_local
+from ys7 import get_device_info, preset_move, capture
 
-log = logging.getLogger("ys7_snap")
+log = logging.getLogger("hniot_connect_sl651")
 
 
 @aps.corn(settings.SNAP_CRON_EXPR)
@@ -47,3 +48,7 @@ def on_capture():
         except Exception as ex:
             log.error(ex)
         continue
+
+
+def init():
+    pass

@@ -4,8 +4,8 @@ import requests
 from cacheout import Cache
 from requests import RequestException
 
-from ys7_snap import settings
-from ys7_snap.error import AccessTokenError, get_err_msg, CaptureError
+import settings
+from error import AccessTokenError, get_err_msg, CaptureError
 
 cache = Cache(maxsize=500, ttl=settings.YS_TOKEN_CACHE_TIME, timer=time.time, default=None)
 

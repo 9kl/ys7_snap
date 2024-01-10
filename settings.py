@@ -1,4 +1,3 @@
-import logging
 import os
 import uuid
 
@@ -97,58 +96,3 @@ YS_APP_SECRET = conf_data.get('ys_app_secret')
 YS_TOKEN_CACHE_TIME = conf_data.get('ys_token_cache_time')
 # 抓拍定时器表达式
 SNAP_CRON_EXPR = conf_data.get('snap_cron_expr')
-
-# log config
-LOGGING_CONFIG = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        }
-    },
-    'filters': {
-        'filter_by_name': {
-            'class': 'logging.Filter',
-            'name': 'ys7_snap'
-        },
-        'filter_single_level_pass': {
-            'class': 'logging.StreamHandler',
-            'pass_level': logging.INFO
-        }
-    },
-    'handlers': {
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'filters': ['filter_by_name'],
-            'formatter': 'verbose'
-        },
-        'fileHandler': {
-            'level': logging.INFO,
-            'class': 'logging.FileHandler',
-            'filters': ['filter_single_level_pass'],
-            'filename': 'info.log',
-            'formatter': 'verbose',
-        },
-        'rotatingFileHandler': {
-            'level': logging.WARNING,
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filters': ['filter_single_level_pass'],
-            'filename': 'error.log',
-            'formatter': 'verbose',
-            'maxBytes': 256,
-            'backupCount': 1
-        },
-    },
-    'loggers': {
-        'connect': {
-            'handlers': ['fileHandler', 'rotatingFileHandler', 'console'],
-            'level': 'INFO',
-            'propagate': False
-        },
-    }
-}
